@@ -1,0 +1,25 @@
+create table Train (T_No NUMBER (6) PRIMARY KEY,
+T_name VARCHAR2(100) NOT NULL);
+create table Station (S_code VARCHAR2(4) PRIMARY KEY,
+S_name VARCHAR2(50) NOT NULL);
+create table Coach (C_no VARCHAR (4) PRIMARY KEY,
+C_type VARCHAR2(6) NOT NULL);
+create table Userm (U_email VARCHAR2 (100) PRIMARY KEY,
+U_pass VARCHAR2 (16) NOT NULL,
+U_Fn VARCHAR2 (50) NOT NULL,
+U_Ln VARCHAR2 (50) NOT NULL);
+create table Booking_Details ( Sno NUMBER (3) PRIMARY KEY,
+T_no NUMBER (6) REFERENCES Train(T_no),
+P_name VARCHAR2 (100) NOT NULL,
+P_gender VARCHAR2 (1) NOT NULL,
+P_age NUMBER (3) NOT NULL,
+P_Berth VARCHAR2 (2),
+B_Station VARCHAR2 (5) REFERENCES Station(S_code),
+D_Station VARCHAR2 (5) REFERENCES Station(S_code));
+create table Ticket (PNR NUMBER (15) PRIMARY KEY,
+Status VARCHAR2 (3) NOT NULL);
+create table Seats (PNR NUMBER (15) PRIMARY KEY REFERENCES Ticket(PNR),
+Sno NUMBER (3) REFERENCES Booking_Details(Sno),
+C_no VARCHAR2 (3) REFERENCES Coach(C_no),
+S_no NUMBER (3) NOT NULL,
+A_Berth VARCHAR2 (2) NOT NULL);
